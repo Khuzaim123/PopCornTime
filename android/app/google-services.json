@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "636444728768",
+    "project_id": "popcorntime-4b65b",
+    "storage_bucket": "popcorntime-4b65b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636444728768:android:37dd01265099980df7fc25",
+        "android_client_info": {
+          "package_name": "com.example.popcorntime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9_2_2DlZxpkpz7i2__yw8dk5Nvge8HZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
