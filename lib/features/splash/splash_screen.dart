@@ -29,13 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
     if (!mounted) return;
 
     // Navigate to appropriate screen
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder:
-            (context) =>
-                user != null ? const HomeScreen() : const LoginScreen(),
-      ),
-    );
+    Navigator.of(
+      context,
+    ).pushReplacementNamed(user != null ? '/home' : '/login');
   }
 
   @override

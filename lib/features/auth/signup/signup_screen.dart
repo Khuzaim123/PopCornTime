@@ -35,27 +35,27 @@ class _SignupScreenState extends State<SignupScreen> {
     });
 
     try {
-      // Navigate to OTP verification screen
-      if (mounted) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder:
-                (context) => OtpVerificationScreen(
-                  email: _emailController.text,
-                  password: _passwordController.text,
-                  phoneNumber: _phoneNumber ?? '',
-                ),
-          ),
-        );
+      // Create user with email and password
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: _emailController.text,
+            password: _passwordController.text,
+          );
+      User? user = userCredential.user;
+      if (user != null) {
+        // Save user to Firestore with isVerified: true
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'uid': user.uid,
+          'email': _emailController.text,
+          'phoneNumber': _phoneNumber ?? '',
+          'isVerified': true,
+          'createdAt': FieldValue.serverTimestamp(),
+          'lastLoginAt': FieldValue.serverTimestamp(),
+        });
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed('/home');
+        }
       }
-      // Save user to Firestore with isVerified: false
-      await FirebaseFirestore.instance.collection('users').add({
-        'email': _emailController.text,
-        'phoneNumber': _phoneNumber ?? '',
-        'isVerified': false,
-        'createdAt': FieldValue.serverTimestamp(),
-      });
     } catch (e) {
       ScaffoldMessenger.of(
         context,

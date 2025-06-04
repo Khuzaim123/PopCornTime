@@ -34,25 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
             );
         User? user = userCredential.user;
         if (user != null) {
-          // Fetch user document from Firestore
-          final doc =
-              await FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(user.uid)
-                  .get();
-          final data = doc.data();
-          if (data != null && data['isVerified'] == true) {
-            // Allow login, Firebase auth state listener in main.dart will handle navigation
-          } else {
-            await FirebaseAuth.instance.signOut();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Your account is not verified. Please complete OTP verification.',
-                ),
-              ),
-            );
-          }
+          // Navigate to home screen after successful login
+          Navigator.of(context).pushReplacementNamed('/home');
         }
       } on FirebaseAuthException catch (e) {
         String message;

@@ -8,6 +8,8 @@ class HomeScreen extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signOut();
+      // Navigate to login screen after sign out
+      Navigator.of(context).pushReplacementNamed('/login');
     } catch (e) {
       // Handle sign out errors (e.g., show a SnackBar)
       ScaffoldMessenger.of(context).showSnackBar(

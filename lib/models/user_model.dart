@@ -18,7 +18,7 @@ class UserModel {
     required this.createdAt,
     required this.lastLoginAt,
     this.phoneNumber,
-    this.isVerified = false,
+    this.isVerified = true,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {

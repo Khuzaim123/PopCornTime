@@ -6,6 +6,7 @@ import 'package:popcorntime/core/theme/app_theme.dart';
 import 'package:popcorntime/features/auth/login/login_screen.dart';
 import 'package:popcorntime/features/home/home_screen.dart';
 import 'firebase_options.dart';
+import 'routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,18 +25,8 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark, // Set initial theme mode to dark
       debugShowCheckedModeBanner: false,
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const SplashScreen();
-          } else if (snapshot.hasData) {
-            return const HomeScreen();
-          } else {
-            return const LoginScreen();
-          }
-        },
-      ),
+      initialRoute: '/', // Set the initial route
+      routes: routes, // Use the defined routes
     );
   }
 }
