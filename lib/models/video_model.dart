@@ -1,46 +1,30 @@
 class VideoModel {
-  final String id;
   final String key;
-  final String name;
   final String site;
   final String type;
-  final int size;
-  final bool official;
+  final String name;
 
-  const VideoModel({
-    required this.id,
+  VideoModel({
     required this.key,
-    required this.name,
     required this.site,
     required this.type,
-    required this.size,
-    required this.official,
+    required this.name,
   });
 
   factory VideoModel.fromJson(Map<String, dynamic> json) {
     return VideoModel(
-      id: json['id'] as String,
       key: json['key'] as String,
-      name: json['name'] as String,
       site: json['site'] as String,
       type: json['type'] as String,
-      size: json['size'] as int,
-      official: json['official'] as bool,
+      name: json['name'] as String,
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'key': key,
-      'name': name,
-      'site': site,
-      'type': type,
-      'size': size,
-      'official': official,
-    };
-  }
+  String get youtubeUrl => 'https://www.youtube.com/watch?v=$key';
+  String get youtubeThumbnailUrl =>
+      'https://img.youtube.com/vi/$key/maxresdefault.jpg';
 
-  String get youtubeUrl =>
-      site == 'YouTube' ? 'https://www.youtube.com/watch?v=$key' : '';
+  Map<String, dynamic> toJson() {
+    return {'key': key, 'site': site, 'type': type, 'name': name};
+  }
 }

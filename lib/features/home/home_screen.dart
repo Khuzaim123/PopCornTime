@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import '../../models/movie_model.dart';
-import '../../core/widgets/movie_card.dart';
+import 'package:popcorntime/models/movie_model.dart';
+import 'package:popcorntime/services/tmdb_service.dart';
+import 'package:popcorntime/core/routes/app_router.dart';
+import 'package:popcorntime/core/widgets/bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,123 +12,126 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<MovieModel> trendingMovies = [];
-  List<MovieModel> topRatedMovies = [];
-  List<MovieModel> upcomingMovies = [];
-  List<MovieModel> nowPlayingMovies = [];
-  bool isLoading = true;
+  final TMDBService _tmdbService = TMDBService();
+  int _currentIndex = 0;
+  final TextEditingController _searchController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    fetchMovies();
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
-  Future<void> fetchMovies() async {
-    final apiKey = 'fb7bb23f03b6994dafc674c074d01761'; // Replace with your TMDB API key
-    final baseUrl = 'https://api.themoviedb.org/3';
-
-    try {
-      final trendingResponse = await http.get(
-        Uri.parse('$baseUrl/trending/movie/week?api_key=$apiKey'),
-      );
-      final topRatedResponse = await http.get(
-        Uri.parse('$baseUrl/movie/top_rated?api_key=$apiKey'),
-      );
-      final upcomingResponse = await http.get(
-        Uri.parse('$baseUrl/movie/upcoming?api_key=$apiKey'),
-      );
-      final nowPlayingResponse = await http.get(
-        Uri.parse('$baseUrl/movie/now_playing?api_key=$apiKey'),
-      );
-
-      if (trendingResponse.statusCode == 200) {
-        final data = json.decode(trendingResponse.body);
-        setState(() {
-          trendingMovies =
-              (data['results'] as List)
-                  .map((movie) => MovieModel.fromJson(movie))
-                  .toList();
-        });
-      }
-
-      if (topRatedResponse.statusCode == 200) {
-        final data = json.decode(topRatedResponse.body);
-        setState(() {
-          topRatedMovies =
-              (data['results'] as List)
-                  .map((movie) => MovieModel.fromJson(movie))
-                  .toList();
-        });
-      }
-
-      if (upcomingResponse.statusCode == 200) {
-        final data = json.decode(upcomingResponse.body);
-        setState(() {
-          upcomingMovies =
-              (data['results'] as List)
-                  .map((movie) => MovieModel.fromJson(movie))
-                  .toList();
-        });
-      }
-
-      if (nowPlayingResponse.statusCode == 200) {
-        final data = json.decode(nowPlayingResponse.body);
-        setState(() {
-          nowPlayingMovies =
-              (data['results'] as List)
-                  .map((movie) => MovieModel.fromJson(movie))
-                  .toList();
-        });
-      }
-    } catch (e) {
-      print('Error fetching movies: $e');
-    } finally {
-      setState(() {
-        isLoading = false;
-      });
+  void _onSearchSubmitted(String query) {
+    if (query.isNotEmpty) {
+      AppRouter.navigateToSearch(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Movie Browser')),
-      body:
-          isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildMovieSection('Trending Movies', trendingMovies),
-                    _buildMovieSection('Top Rated Movies', topRatedMovies),
-                    _buildMovieSection('Upcoming Movies', upcomingMovies),
-                    _buildMovieSection('Now Playing Movies', nowPlayingMovies),
-                  ],
-                ),
-              ),
+      appBar: AppBar(
+        title: TextField(
+          controller: _searchController,
+          decoration: const InputDecoration(
+            hintText: 'Search movies...',
+            border: InputBorder.none,
+          ),
+          onSubmitted: _onSearchSubmitted,
+        ),
+      ),
+      body: ListView(
+        children: [
+          _buildMovieSection('Trending', _tmdbService.getTrendingMovies()),
+          _buildMovieSection('Top Rated', _tmdbService.getTopRatedMovies()),
+          _buildMovieSection('Upcoming', _tmdbService.getUpcomingMovies()),
+          _buildMovieSection('Now Playing', _tmdbService.getNowPlayingMovies()),
+        ],
+      ),
+      bottomNavigationBar: BottomNavBar(currentIndex: _currentIndex),
     );
   }
 
-  Widget _buildMovieSection(String title, List<MovieModel> movies) {
+  Widget _buildMovieSection(String title, Future<dynamic> future) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
+          padding: const EdgeInsets.all(16.0),
+          child: Text(title, style: Theme.of(context).textTheme.headlineSmall),
         ),
         SizedBox(
-          height: 240,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: movies.length,
-            itemBuilder: (context, index) {
-              return MovieCard(movie: movies[index]);
+          height: 270, // Adjust as needed for your card size
+          child: FutureBuilder(
+            future: future,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              if (snapshot.hasError) {
+                return Center(child: Text('Error: \\${snapshot.error}'));
+              }
+
+              final movies = snapshot.data!.results as List<MovieModel>;
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: movies.length,
+                itemBuilder: (context, index) {
+                  final movie = movies[index];
+                  return GestureDetector(
+                    onTap: () {
+                      AppRouter.navigateToMovieDetails(
+                        context,
+                        movieId: movie.id,
+                      );
+                    },
+                    child: Container(
+                      width: 150,
+                      margin: const EdgeInsets.only(left: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child:
+                                movie.posterPath.isNotEmpty
+                                    ? Image.network(
+                                      movie.posterUrl,
+                                      fit: BoxFit.cover,
+                                    )
+                                    : const Center(
+                                      child: Icon(Icons.movie, size: 50),
+                                    ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            movie.title,
+                            style: Theme.of(context).textTheme.titleMedium,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 16,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                movie.voteAverage.toStringAsFixed(1),
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
             },
           ),
         ),

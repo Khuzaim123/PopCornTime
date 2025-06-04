@@ -2,15 +2,13 @@ class CastModel {
   final int id;
   final String name;
   final String character;
-  final String? profilePath;
-  final int? order;
+  final String profilePath;
 
-  const CastModel({
+  CastModel({
     required this.id,
     required this.name,
     required this.character,
-    this.profilePath,
-    this.order,
+    required this.profilePath,
   });
 
   factory CastModel.fromJson(Map<String, dynamic> json) {
@@ -18,10 +16,11 @@ class CastModel {
       id: json['id'] as int,
       name: json['name'] as String,
       character: json['character'] as String,
-      profilePath: json['profile_path'] as String?,
-      order: json['order'] as int?,
+      profilePath: json['profile_path'] as String? ?? '',
     );
   }
+
+  String get profileUrl => 'https://image.tmdb.org/t/p/w200$profilePath';
 
   Map<String, dynamic> toJson() {
     return {
@@ -29,12 +28,6 @@ class CastModel {
       'name': name,
       'character': character,
       'profile_path': profilePath,
-      'order': order,
     };
   }
-
-  String get profileUrl =>
-      profilePath != null
-          ? 'https://image.tmdb.org/t/p/w185$profilePath'
-          : 'https://via.placeholder.com/185x278?text=No+Image';
 }

@@ -43,14 +43,12 @@ class _SignupScreenState extends State<SignupScreen> {
           );
       User? user = userCredential.user;
       if (user != null) {
-        // Save user to Firestore with isVerified: true
+        // Save user to Firestore according to UserModel
         await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
           'uid': user.uid,
           'email': _emailController.text,
-          'phoneNumber': _phoneNumber ?? '',
-          'isVerified': true,
-          'createdAt': FieldValue.serverTimestamp(),
-          'lastLoginAt': FieldValue.serverTimestamp(),
+          'displayName': user.email?.split('@').first ?? '',
+          'watchlistMovieIds': [],
         });
         if (mounted) {
           Navigator.of(context).pushReplacementNamed('/home');

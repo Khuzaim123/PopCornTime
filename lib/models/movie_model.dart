@@ -6,9 +6,9 @@ class MovieModel {
   final int id;
   final String title;
   final String overview;
-  final String? posterPath;
-  final String? backdropPath;
-  final String? releaseDate;
+  final String posterPath;
+  final String backdropPath;
+  final String releaseDate;
   final double voteAverage;
   final int voteCount;
   final List<int> genreIds;
@@ -21,9 +21,9 @@ class MovieModel {
     required this.id,
     required this.title,
     required this.overview,
-    this.posterPath,
-    this.backdropPath,
-    this.releaseDate,
+    required this.posterPath,
+    required this.backdropPath,
+    required this.releaseDate,
     required this.voteAverage,
     required this.voteCount,
     required this.genreIds,
@@ -35,16 +35,31 @@ class MovieModel {
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
-      id: json['id'] as int,
-      title: json['title'] as String,
-      overview: json['overview'] as String,
-      posterPath: json['poster_path'] as String?,
-      backdropPath: json['backdrop_path'] as String?,
-      releaseDate: json['release_date'] as String?,
-      voteAverage: (json['vote_average'] as num).toDouble(),
-      voteCount: json['vote_count'] as int,
-      genreIds: List<int>.from(json['genre_ids'] as List),
-      runtime: json['runtime'] as int?,
+      id:
+          json['id'] is int
+              ? json['id']
+              : int.tryParse(json['id']?.toString() ?? '0') ?? 0,
+      title: json['title'] as String? ?? '',
+      overview: json['overview'] as String? ?? '',
+      posterPath: json['poster_path'] as String? ?? '',
+      backdropPath: json['backdrop_path'] as String? ?? '',
+      releaseDate: json['release_date'] as String? ?? '',
+      voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0.0,
+      voteCount:
+          json['vote_count'] is int
+              ? json['vote_count']
+              : int.tryParse(json['vote_count']?.toString() ?? '0') ?? 0,
+      genreIds:
+          (json['genre_ids'] as List?)
+              ?.map(
+                (e) => e is int ? e : int.tryParse(e?.toString() ?? '0') ?? 0,
+              )
+              .toList() ??
+          [],
+      runtime:
+          json['runtime'] is int
+              ? json['runtime']
+              : int.tryParse(json['runtime']?.toString() ?? ''),
       genres:
           json['genres'] != null
               ? List<GenreModel>.from(
@@ -82,13 +97,6 @@ class MovieModel {
     };
   }
 
-  String get posterUrl =>
-      posterPath != null
-          ? 'https://image.tmdb.org/t/p/w500$posterPath'
-          : 'https://via.placeholder.com/500x750?text=No+Poster';
-
-  String get backdropUrl =>
-      backdropPath != null
-          ? 'https://image.tmdb.org/t/p/original$backdropPath'
-          : 'https://via.placeholder.com/1920x1080?text=No+Backdrop';
+  String get posterUrl => 'https://image.tmdb.org/t/p/w500$posterPath';
+  String get backdropUrl => 'https://image.tmdb.org/t/p/original$backdropPath';
 }

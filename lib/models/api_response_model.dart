@@ -6,7 +6,7 @@ class APIResponseModel {
   final int totalPages;
   final int totalResults;
 
-  const APIResponseModel({
+  APIResponseModel({
     required this.page,
     required this.results,
     required this.totalPages,
@@ -15,12 +15,25 @@ class APIResponseModel {
 
   factory APIResponseModel.fromJson(Map<String, dynamic> json) {
     return APIResponseModel(
-      page: json['page'] as int,
-      results: List<MovieModel>.from(
-        (json['results'] as List).map((x) => MovieModel.fromJson(x)),
-      ),
-      totalPages: json['total_pages'] as int,
-      totalResults: json['total_results'] as int,
+      page:
+          json['page'] is int
+              ? json['page']
+              : int.tryParse(json['page']?.toString() ?? '1') ?? 1,
+      results:
+          (json['results'] as List?)
+              ?.map(
+                (movie) => MovieModel.fromJson(movie as Map<String, dynamic>),
+              )
+              .toList() ??
+          [],
+      totalPages:
+          json['total_pages'] is int
+              ? json['total_pages']
+              : int.tryParse(json['total_pages']?.toString() ?? '1') ?? 1,
+      totalResults:
+          json['total_results'] is int
+              ? json['total_results']
+              : int.tryParse(json['total_results']?.toString() ?? '0') ?? 0,
     );
   }
 

@@ -34,6 +34,16 @@ class _LoginScreenState extends State<LoginScreen> {
             );
         User? user = userCredential.user;
         if (user != null) {
+          // Fetch user info from Firestore according to UserModel
+          final doc =
+              await FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(user.uid)
+                  .get();
+          if (doc.exists) {
+            final userData = doc.data()!;
+            // You can use UserModel.fromJson(userData) if needed
+          }
           // Navigate to home screen after successful login
           Navigator.of(context).pushReplacementNamed('/home');
         }
