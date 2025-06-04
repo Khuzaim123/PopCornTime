@@ -93,4 +93,23 @@ class TMDBService {
         .map((genre) => GenreModel.fromJson(genre))
         .toList();
   }
+
+  // Get actor (person) details
+  Future<Map<String, dynamic>> getPersonDetails(int personId) async {
+    final response = await http.get(
+      Uri.parse('$_baseUrl/person/$personId?api_key=$_apiKey'),
+    );
+    return json.decode(response.body) as Map<String, dynamic>;
+  }
+
+  // Get actor's movie credits
+  Future<List<MovieModel>> getPersonMovieCredits(int personId) async {
+    final response = await http.get(
+      Uri.parse('$_baseUrl/person/$personId/movie_credits?api_key=$_apiKey'),
+    );
+    final data = json.decode(response.body);
+    return (data['cast'] as List)
+        .map((movie) => MovieModel.fromJson(movie))
+        .toList();
+  }
 }

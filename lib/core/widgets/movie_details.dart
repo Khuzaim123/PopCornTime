@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../theme/app_colors.dart';
 import '../../models/movie_model.dart';
 import '../../models/credits_model.dart';
+import '../../models/cast_model.dart';
 
 class MovieDetails extends StatelessWidget {
   final MovieModel movie;
@@ -10,6 +11,7 @@ class MovieDetails extends StatelessWidget {
   final bool isInWatchlist;
   final VoidCallback? onWatchlistToggle;
   final VoidCallback? onPlayTrailer;
+  final void Function(CastModel)? onActorTap;
 
   const MovieDetails({
     super.key,
@@ -18,6 +20,7 @@ class MovieDetails extends StatelessWidget {
     this.isInWatchlist = false,
     this.onWatchlistToggle,
     this.onPlayTrailer,
+    this.onActorTap,
   });
 
   @override
@@ -230,7 +233,7 @@ class MovieDetails extends StatelessWidget {
                     height: 1.5,
                   ),
                 ),
-                if (credits != null) ...[
+                if (credits != null && credits!.cast.isNotEmpty) ...[
                   const SizedBox(height: 24),
                   // Cast
                   Text(
@@ -248,43 +251,49 @@ class MovieDetails extends StatelessWidget {
                       itemCount: credits!.cast.length,
                       itemBuilder: (context, index) {
                         final person = credits!.cast[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 16),
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 32,
-                                backgroundImage:
-                                    person.profilePath != null
-                                        ? CachedNetworkImageProvider(
-                                          'https://image.tmdb.org/t/p/w185${person.profilePath}',
-                                        )
-                                        : null,
-                                child:
-                                    person.profilePath == null
-                                        ? const Icon(Icons.person)
-                                        : null,
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                person.name,
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: theme.colorScheme.onSurface,
-                                  fontWeight: FontWeight.bold,
+                        return GestureDetector(
+                          onTap:
+                              onActorTap != null
+                                  ? () => onActorTap!(person)
+                                  : null,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 16),
+                            child: Column(
+                              children: [
+                                CircleAvatar(
+                                  radius: 32,
+                                  backgroundImage:
+                                      person.profilePath.isNotEmpty
+                                          ? CachedNetworkImageProvider(
+                                            'https://image.tmdb.org/t/p/w185${person.profilePath}',
+                                          )
+                                          : null,
+                                  child:
+                                      person.profilePath.isEmpty
+                                          ? const Icon(Icons.person)
+                                          : null,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                person.character,
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: theme.colorScheme.onSurface
-                                      .withOpacity(0.7),
+                                const SizedBox(height: 8),
+                                Text(
+                                  person.name,
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                    color: theme.colorScheme.onSurface,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
+                                Text(
+                                  person.character,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: theme.colorScheme.onSurface
+                                        .withOpacity(0.7),
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

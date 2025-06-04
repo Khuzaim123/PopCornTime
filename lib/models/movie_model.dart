@@ -16,6 +16,7 @@ class MovieModel {
   final List<GenreModel>? genres;
   final CreditsModel? credits;
   final VideoResponseModel? videos;
+  final String? character;
 
   const MovieModel({
     required this.id,
@@ -31,6 +32,7 @@ class MovieModel {
     this.genres,
     this.credits,
     this.videos,
+    this.character,
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -76,6 +78,7 @@ class MovieModel {
                 json['videos'] as Map<String, dynamic>,
               )
               : null,
+      character: json['character'] as String?,
     );
   }
 
@@ -94,6 +97,7 @@ class MovieModel {
       'genres': genres?.map((x) => x.toJson()).toList(),
       'credits': credits?.toJson(),
       'videos': videos?.toJson(),
+      'character': character,
     };
   }
 
