@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:popcorntime/services/auth_service.dart';
 import 'package:popcorntime/core/routes/app_router.dart';
 import 'package:popcorntime/core/widgets/bottom_nav_bar.dart';
+import 'package:popcorntime/features/profile/help_support_screen.dart';
+import 'package:popcorntime/features/profile/settings_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -67,14 +69,24 @@ class ProfileScreen extends StatelessWidget {
                     leading: const Icon(Icons.settings),
                     title: const Text('Settings'),
                     onTap: () {
-                      // TODO: Implement settings screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsScreen(),
+                        ),
+                      );
                     },
                   ),
                   ListTile(
                     leading: const Icon(Icons.help),
                     title: const Text('Help & Support'),
                     onTap: () {
-                      // TODO: Implement help & support screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HelpSupportScreen(),
+                        ),
+                      );
                     },
                   ),
                   ListTile(
