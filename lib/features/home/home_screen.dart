@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(child: Text('Welcome to PopcornTime hello!')),
+      body: const Center(child: Text('Welcome to PopcornTime!')),
     );
   }
 }
