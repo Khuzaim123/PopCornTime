@@ -32,13 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextField(
-          controller: _searchController,
-          decoration: const InputDecoration(
-            hintText: 'Search movies...',
-            border: InputBorder.none,
-          ),
-          onSubmitted: _onSearchSubmitted,
+        title: const Text('PopCornTime'),
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
         ),
       ),
       body: ListView(
@@ -49,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           _buildMovieSection('Now Playing', _tmdbService.getNowPlayingMovies()),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(currentIndex: _currentIndex),
+      bottomNavigationBar: BottomNavBar(currentIndex: 0),
     );
   }
 

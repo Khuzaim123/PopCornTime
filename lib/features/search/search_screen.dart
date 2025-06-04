@@ -3,6 +3,7 @@ import 'package:popcorntime/models/movie_model.dart';
 import 'package:popcorntime/services/tmdb_service.dart';
 import 'package:popcorntime/core/routes/app_router.dart';
 import 'dart:async';
+import 'package:popcorntime/core/widgets/bottom_nav_bar.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -125,6 +126,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 },
               ),
+      bottomNavigationBar: BottomNavBar(currentIndex: 1),
     );
   }
 }

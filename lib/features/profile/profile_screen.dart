@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:popcorntime/services/auth_service.dart';
 import 'package:popcorntime/core/routes/app_router.dart';
+import 'package:popcorntime/core/widgets/bottom_nav_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -95,6 +96,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
+      bottomNavigationBar: BottomNavBar(currentIndex: 3),
     );
   }
 }
