@@ -222,14 +222,24 @@ class ActorDetailScreen extends StatelessWidget {
                           Center(
                             child: CircleAvatar(
                               radius: 60,
-                              backgroundImage:
-                                  person.profilePath.isNotEmpty
-                                      ? NetworkImage(person.profileUrl)
-                                      : null,
+                              backgroundColor: Colors.grey[300],
                               child:
-                                  person.profilePath.isEmpty
-                                      ? const Icon(Icons.person, size: 60)
-                                      : null,
+                                  person.profilePath.isNotEmpty
+                                      ? ClipOval(
+                                        child: Image.network(
+                                          person.profileUrl,
+                                          width: 120,
+                                          height: 120,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  const Icon(
+                                                    Icons.person,
+                                                    size: 60,
+                                                  ),
+                                        ),
+                                      )
+                                      : const Icon(Icons.person, size: 60),
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -282,7 +292,7 @@ class ActorDetailScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 220,
+                        height: 250,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount:
@@ -305,6 +315,7 @@ class ActorDetailScreen extends StatelessWidget {
                                 width: 120,
                                 margin: const EdgeInsets.all(8),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
@@ -321,11 +332,14 @@ class ActorDetailScreen extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 8),
-                                    Text(
-                                      movie.title,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.center,
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        movie.title,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ],
                                 ),

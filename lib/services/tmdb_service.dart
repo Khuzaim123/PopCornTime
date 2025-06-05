@@ -5,6 +5,7 @@ import '../models/movie_model.dart';
 import '../models/cast_model.dart';
 import '../models/video_model.dart';
 import '../models/genre_model.dart';
+import '../models/person_model.dart' as person;
 
 class TMDBService {
   static const String _baseUrl = 'https://api.themoviedb.org/3';
@@ -51,6 +52,21 @@ class TMDBService {
       ),
     );
     return APIResponseModel.fromJson(json.decode(response.body));
+  }
+
+  // Search actors
+  Future<List<person.PersonModel>> searchActors(
+    String query, {
+    int page = 1,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        '$_baseUrl/search/person?api_key=$_apiKey&query=$query&page=$page',
+      ),
+    );
+    final data = json.decode(response.body);
+    final results = data['results'] as List;
+    return results.map((json) => person.PersonModel.fromJson(json)).toList();
   }
 
   // Get movie details

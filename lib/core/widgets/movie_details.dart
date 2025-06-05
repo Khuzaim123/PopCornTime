@@ -257,42 +257,42 @@ class MovieDetails extends StatelessWidget {
                                   ? () => onActorTap!(person)
                                   : null,
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 16),
-                            child: Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 32,
-                                  backgroundImage:
+                          padding: const EdgeInsets.only(right: 16),
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 32,
+                                backgroundImage:
                                       person.profilePath.isNotEmpty
-                                          ? CachedNetworkImageProvider(
-                                            'https://image.tmdb.org/t/p/w185${person.profilePath}',
-                                          )
-                                          : null,
-                                  child:
+                                        ? CachedNetworkImageProvider(
+                                          'https://image.tmdb.org/t/p/w185${person.profilePath}',
+                                        )
+                                        : null,
+                                child:
                                       person.profilePath.isEmpty
-                                          ? const Icon(Icons.person)
-                                          : null,
+                                        ? const Icon(Icons.person)
+                                        : null,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                person.name,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: theme.colorScheme.onSurface,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  person.name,
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.colorScheme.onSurface,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                person.character,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: theme.colorScheme.onSurface
+                                      .withOpacity(0.7),
                                 ),
-                                Text(
-                                  person.character,
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: theme.colorScheme.onSurface
-                                        .withOpacity(0.7),
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
                             ),
                           ),
                         );

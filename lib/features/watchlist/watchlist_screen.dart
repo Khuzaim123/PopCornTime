@@ -144,3 +144,4 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
     );
   }
 }
+ 
