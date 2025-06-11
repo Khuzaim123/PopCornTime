@@ -102,9 +102,9 @@ Run the command in terminal
 - v1.1.1(Upcoming) Going to add Rating Functionality
 
 ### FAQ
-How do I get a TMDB API key? Visit themoviedb.org and sign up for a free account.
-Can I use the app offline? Partial support via cached data; full offline mode is in development.
-How do I report a bug? Open an issue on the GitHub repository.
+- How do I get a TMDB API key? Visit themoviedb.org and sign up for a free account.
+- Can I use the app offline? Partial support via cached data; full offline mode is in development.
+- How do I report a bug? Open an issue on the GitHub repository.
 
 ### Lisence 
 This project is licensed under the MIT License. See the LICENSE file for details.
