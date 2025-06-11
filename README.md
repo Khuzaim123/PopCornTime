@@ -1,5 +1,7 @@
 # PopCornTime 🍿
 
+![Logo](https://github.com/user-attachments/assets/d9a1f482-d66b-421e-909c-50fe79eff4a8)
+
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-%23039BE5.svg?style=for-the-badge&logo=Firebase&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-%230175C2.svg?style=for-the-badge&logo=Dart&logoColor=white)
@@ -45,7 +47,7 @@
 - **Firebase CLI**: For Firebase setup
 - **API Key**: Obtain a TMDB API key from [themoviedb.org](https://www.themoviedb.org/)
 - **IDE**: Android Studio, VS Code, or similar
-- Android/iOS emulator or physical device
+- Android emulator or physical device
 
 ### Installation
 1. **Clone the Repository**:
@@ -82,7 +84,6 @@ Run the command in terminal
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ### Usage
-## Usage
 1. **Sign In**: Use email/password, social login, or anonymous mode via Firebase Authentication.
 2. **Search**: Enter movie or actor names in the search bar to explore content.
 3. **View Details**: Tap a movie or actor to see detailed info and trailers.
@@ -91,15 +92,13 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ### Project Structure
 
-PopCornTime/
-├── lib/
-│   ├── core/                # Core utilities (routes, theme)
-│   ├── features/            # Feature-specific screens (auth, home, movie details)
-│   ├── models/              # Data models (movie, actor, user)
-│   ├── services/            # API and Firebase services (auth, tmdb, watchlist)
-│   ├── widgets/             # Reusable UI components (nav bar, movie card)
-├── assets/                  # Images, icons, animations
-├── pubspec.yaml             # Project configuration and dependencies
+![image](https://github.com/user-attachments/assets/6336d7b2-6fa6-487b-91a7-e5f0987d567a)
+
+### RoadMap
+- Add offline trailer caching for better accessibility.
+- Implement multi-language support for global users.
+- Introduce personalized movie recommendations using Firestore data.
+- Enhance UI with dark mode and animations.
 
 ### FAQ
 How do I get a TMDB API key? Visit themoviedb.org and sign up for a free account.
