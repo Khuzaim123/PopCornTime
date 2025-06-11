@@ -67,7 +67,10 @@
     flutterfire configure
 
 4. **Configure TMDB API Key**
-- Paste the api key into the Services/tmdb_services.dart
+- Open lib/Services/tmdb_services.dart and replace the placeholder with your TMDB API key:
+    ```dart
+    static const String _apiKey = 'Your_Api_Key';    
+  
 
 5. **Generate Assets:**
 Run the command in terminal
@@ -109,7 +112,7 @@ Run the command in terminal
 - Enhance UI with dark mode and animations.
 
 ### ChangeLog:
-- v1.0.0 Initial release with movie search, authentication , movie detail , and watchlist functionality.
+- v1.0.0 Initial release with movie search, authentication, movie details, and watchlist functionality.
 - v1.0.1 Some Bug Fixes
 - v1.1.0 Added Actor detail screen , Search actor , Watch movie trailers
 - v1.1.1(Upcoming) Going to add Rating Functionality
@@ -119,12 +122,12 @@ Run the command in terminal
 - Can I use the app offline? Partial support via cached data; full offline mode is in development.
 - How do I report a bug? Open an issue on the GitHub repository.
 
-### Lisence 
+### Licence 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ### Contact: 
 - Maintainer: Khuzaim123
 - Issues: Report bugs or suggest features on the Issues page.
-- Email: khuazaimadnana@gmail.com
+- Email: khuzaimadnana@gmail.com
 
 
