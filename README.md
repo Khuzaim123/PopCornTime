@@ -52,3 +52,58 @@
    ```bash
    git clone https://github.com/Khuzaim123/PopCornTime.git
    cd PopCornTime
+2. **Install Dependencies**
+   ```bash
+   flutter pub get
+
+3. **Set Up Firebase:**
+- Create a Firebase project in the Firebase Console.
+- Add your Android/iOS app and download google-services.json (Android)
+- Place the files in android/app/ and ios/Runner/ respectively.
+- Enable Authentication and Firestore in the Firebase Console.
+- Configure Firebase:
+  ```bash
+    dart pub global activate flutterfire_cli
+    flutterfire configure
+
+4. **Configure TMDB API Key**
+- Paste the api key into the Services/tmdb_services.dart
+
+5. **Generate Assets:**
+Run the command in terminal
+   ```bash
+   flutter pub run flutter_launcher_icons
+    flutter pub run flutter_native_splash:create
+6. **Run App**
+   ```bash
+   flutter run
+
+### Lisence 
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+### Usage
+## Usage
+1. **Sign In**: Use email/password, social login, or anonymous mode via Firebase Authentication.
+2. **Search**: Enter movie or actor names in the search bar to explore content.
+3. **View Details**: Tap a movie or actor to see detailed info and trailers.
+4. **Add to Watchlist**: Save movies to your Firestore-backed watchlist.
+5. **Rate Movies**: Rate films using the interactive rating bar.
+
+### Project Structure
+
+PopCornTime/
+├── lib/
+│   ├── core/                # Core utilities (routes, theme)
+│   ├── features/            # Feature-specific screens (auth, home, movie details)
+│   ├── models/              # Data models (movie, actor, user)
+│   ├── services/            # API and Firebase services (auth, tmdb, watchlist)
+│   ├── widgets/             # Reusable UI components (nav bar, movie card)
+├── assets/                  # Images, icons, animations
+├── pubspec.yaml             # Project configuration and dependencies
+
+### FAQ
+How do I get a TMDB API key? Visit themoviedb.org and sign up for a free account.
+Can I use the app offline? Partial support via cached data; full offline mode is in development.
+How do I report a bug? Open an issue on the GitHub repository.
+
+
