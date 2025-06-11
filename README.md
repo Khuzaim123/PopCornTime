@@ -18,10 +18,8 @@
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Roadmap](#roadmap)
-- [Known Issues](#known-issues)
 - [Changelog](#changelog)
 - [FAQ](#faq)
-- [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
 
@@ -80,9 +78,6 @@ Run the command in terminal
    ```bash
    flutter run
 
-### Lisence 
-This project is licensed under the MIT License. See the LICENSE file for details.
-
 ### Usage
 1. **Sign In**: Use email/password, social login, or anonymous mode via Firebase Authentication.
 2. **Search**: Enter movie or actor names in the search bar to explore content.
@@ -100,9 +95,23 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - Introduce personalized movie recommendations using Firestore data.
 - Enhance UI with dark mode and animations.
 
+### ChangeLog:
+- v1.0.0 Initial release with movie search, authentication , movie detail , and watchlist functionality.
+- v1.0.1 Some Bug Fixes
+- v1.1.0 Added Actor detail screen , Search actor , Watch movie trailers
+- v1.1.1(Upcoming) Going to add Rating Functionality
+
 ### FAQ
 How do I get a TMDB API key? Visit themoviedb.org and sign up for a free account.
 Can I use the app offline? Partial support via cached data; full offline mode is in development.
 How do I report a bug? Open an issue on the GitHub repository.
+
+### Lisence 
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+### Contact: 
+- Maintainer: Khuzaim123
+- Issues: Report bugs or suggest features on the Issues page.
+- Email: khuazaimadnana@gmail.com
 
 
