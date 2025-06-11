@@ -78,6 +78,19 @@ Run the command in terminal
    ```bash
    flutter run
 
+### Technologies Used
+| Area         | Technology Used                           |
+|--------------|--------------------------------------------|
+| Frontend     | Flutter 3                                  |
+| Backend      | Firebase (Authentication, Firestore)       |
+| State Mgmt   | Provider                                    |
+| API          | TMDB API, YouTube API (for trailers)       |
+| Navigation   | Flutter Navigator                          |
+| Animations   | Flutter built-in animations, `animated_do` |
+| Fonts        | Google Fonts (Poppins)                     |
+
+
+
 ### Usage
 1. **Sign In**: Use email/password, social login, or anonymous mode via Firebase Authentication.
 2. **Search**: Enter movie or actor names in the search bar to explore content.
