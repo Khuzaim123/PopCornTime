@@ -35,7 +35,9 @@
 ## Screenshots
 | Home Screen | Movie Details | Watchlist |
 |-------------|---------------|-----------|
-| ![Home](screenshots/home.png) | ![Details](screenshots/details.png) | ![Watchlist](screenshots/watchlist.png) |
+| ![Home](![image](https://github.com/user-attachments/assets/a998dd64-8aba-47ef-9225-7f7fd026c2ad)
+) | ![Details](![image](https://github.com/user-attachments/assets/29984608-22d2-48b1-a9ea-32c6d26031a4)
+) | ![Watchlist](screenshots/watchlist.png) |
 
 ## Getting Started
 
