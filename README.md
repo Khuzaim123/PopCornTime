@@ -33,11 +33,21 @@
 - **Actor Details**: Explore comprehensive actor profiles.
 
 ## Screenshots
-| Home Screen | Movie Details | Watchlist |
-|-------------|---------------|-----------|
-| ![Home](![image](https://github.com/user-attachments/assets/a998dd64-8aba-47ef-9225-7f7fd026c2ad)
-) | ![Details](![image](https://github.com/user-attachments/assets/29984608-22d2-48b1-a9ea-32c6d26031a4)
-) | ![Watchlist](screenshots/watchlist.png) |
+| Home Screen     | Watchlist       | Search          |
+|-----------------|-----------------|-----------------|
+| ![Home](https://github.com/user-attachments/assets/bc5280c8-cc1a-424c-85ee-1da1f828a08e)| ![Watchlist](https://github.com/user-attachments/assets/a7564abd-f35f-468b-8440-88b16ba5bbd1)| ![Search](https://github.com/user-attachments/assets/424dfd6b-5716-4d58-9673-8a38991b3787)|
+
+| Movie Detail    | Login           | Signup          |
+|-----------------|-----------------|-----------------|
+| ![Movie Detail]![image](https://github.com/user-attachments/assets/3562ee09-c50f-4d82-a01a-6c31d8a30593)| ![Login]![image](https://github.com/user-attachments/assets/fadbef4f-403a-4a9b-9db1-bc07f1685b43)| ![Signup]![image](https://github.com/user-attachments/assets/c6c8d2dd-7a1f-4a19-811a-189ba42c022d)|
+
+| Forget          | Actor Detail    | Profile         |
+|-----------------|-----------------|-----------------|
+| ![Forget](https://github.com/user-attachments/assets/2e9c24ee-260f-4d98-bd10-ddca1940a8c5)| ![Actor Detail](https://github.com/user-attachments/assets/ac5aa4f0-69d8-4695-b57b-cb3a3153f1c5)| ![Profile](https://github.com/user-attachments/assets/58fa7ea1-2180-4ad3-9db8-7806872973d2)|
+
+| Terms of Services | Setting  | Help and Support |
+|-------------------|-----------------|------------------|
+| ![Terms of Services](https://github.com/user-attachments/assets/3b1cbbb9-7d96-4a97-a5c6-3d2149561e2f)| ![Setting](https://github.com/user-attachments/assets/1b22b762-7216-4394-b08f-ebb20521ba46)| ![Help and Support](https://github.com/user-attachments/assets/7542df6c-0074-4ad6-adc8-77275127c41f)|
 
 ## Getting Started
 
