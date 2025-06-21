@@ -39,7 +39,7 @@
 
 | Movie Detail    | Login           | Signup          |
 |-----------------|-----------------|-----------------|
-| ![Movie Detail]![image](https://github.com/user-attachments/assets/3562ee09-c50f-4d82-a01a-6c31d8a30593)| ![Login]![image](https://github.com/user-attachments/assets/fadbef4f-403a-4a9b-9db1-bc07f1685b43)| ![Signup]![image](https://github.com/user-attachments/assets/c6c8d2dd-7a1f-4a19-811a-189ba42c022d)|
+| ![Movie Detail](https://github.com/user-attachments/assets/3562ee09-c50f-4d82-a01a-6c31d8a30593)| ![Login](https://github.com/user-attachments/assets/fadbef4f-403a-4a9b-9db1-bc07f1685b43)| ![Signup](https://github.com/user-attachments/assets/c6c8d2dd-7a1f-4a19-811a-189ba42c022d)|
 
 | Forget          | Actor Detail    | Profile         |
 |-----------------|-----------------|-----------------|
